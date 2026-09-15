@@ -1,11 +1,28 @@
 function Hero() {
   return (
     <section className="hero">
+
       <div className="hero-content">
-        <h1>Welcome to MARS</h1>
-        <p>Discover the latest fashion and trends.</p>
-        <button>Shop Now</button>
+
+        <p className="hero-subtitle">
+          NEW COLLECTION 2026
+        </p>
+
+        <h1>
+          Welcome to MARS
+        </h1>
+
+        <p className="hero-description">
+          Discover the latest fashion, trends and styles
+          designed for you.
+        </p>
+
+        <button className="hero-button">
+          Shop Now
+        </button>
+
       </div>
+
     </section>
   );
 }

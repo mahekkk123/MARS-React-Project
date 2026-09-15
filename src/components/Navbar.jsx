@@ -18,15 +18,24 @@ function Navbar() {
       {/* Search + Account + Cart */}
       <div className="nav-actions">
 
+        {/* Search */}
         <div className="search-box">
           <span>🔍</span>
-          <input type="text" placeholder="Search" />
+          <input
+            type="text"
+            placeholder="Search products..."
+          />
         </div>
 
-        <button className="icon-button">👤</button>
-
+        {/* Account */}
         <button className="icon-button">
+          👤
+        </button>
+
+        {/* Cart */}
+        <button className="icon-button cart-button">
           🛒
+          <span className="cart-count">0</span>
         </button>
 
       </div>
