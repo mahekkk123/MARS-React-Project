@@ -1,4 +1,6 @@
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar {
   display: flex;
@@ -59,7 +61,11 @@
   font-size: 20px;
   cursor: pointer;
 }
-/* HERO */
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
   min-height: 520px;
@@ -102,7 +108,11 @@
 .hero-content button:hover {
   background: #333;
 }
-/* CATEGORY SECTION */
+
+
+/* =========================
+   CATEGORY SECTION
+========================= */
 
 .category-section {
   padding: 60px 50px;
@@ -122,7 +132,9 @@
 }
 
 
-/* CATEGORY CARD */
+/* =========================
+   CATEGORY CARD
+========================= */
 
 .category-card {
   width: 220px;
@@ -144,29 +156,63 @@
   border-radius: 12px;
 }
 
-.category-card h3 {
-  margin-top: 12px;
+.category-info {
+  padding: 10px;
+}
+
+.category-info h3 {
+  margin: 5px 0 10px;
   font-size: 18px;
 }
-/* RESPONSIVE DESIGN */
+
+.category-info button {
+  padding: 8px 18px;
+  border: 1px solid #000;
+  background: white;
+  color: #000;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.category-info button:hover {
+  background: #000;
+  color: white;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
 
 @media (max-width: 768px) {
+
   .navbar {
     padding: 15px 20px;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 15px;
   }
 
+  .logo {
+    font-size: 26px;
+  }
+
   .nav-links {
-    gap: 15px;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .nav-links a {
     font-size: 13px;
   }
 
+  .nav-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
   .search-box {
-    display: none;
+    display: flex;
   }
 
   .hero {
@@ -187,6 +233,7 @@
   }
 
   .category-grid {
+    justify-content: center;
     gap: 15px;
   }
 
@@ -197,27 +244,4 @@
   .category-card img {
     height: 160px;
   }
-}
-/* CATEGORY BUTTON */
-
-.category-info {
-  padding: 10px;
-}
-
-.category-info h3 {
-  margin: 5px 0 10px;
-}
-
-.category-info button {
-  padding: 8px 18px;
-  border: 1px solid #000;
-  background: white;
-  color: #000;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.category-info button:hover {
-  background: #000;
-  color: white;
 }
