@@ -11,13 +11,13 @@ function Hero() {
         </p>
 
         <h1>
-          DEFINE<br />
-          YOUR STYLE.
+          YOUR BEAUTY.<br />
+          YOUR MARS.
         </h1>
 
         <p className="hero-description">
-          Discover fashion that matches your confidence,
-          personality and everyday style.
+          Discover makeup and skincare made to
+          enhance your natural beauty and confidence.
         </p>
 
         <button className="hero-button">
