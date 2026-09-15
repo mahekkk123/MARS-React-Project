@@ -2,12 +2,12 @@ function Navbar() {
   return (
     <nav className="navbar">
 
-      {/* MARS Logo */}
+      {/* Logo */}
       <div className="logo">
         MARS
       </div>
 
-      {/* Navigation Links */}
+      {/* Navigation */}
       <div className="nav-links">
         <a href="#">Home</a>
         <a href="#">Shop</a>
@@ -15,12 +15,12 @@ function Navbar() {
         <a href="#">About</a>
       </div>
 
-      {/* Search + Account + Cart */}
+      {/* Right Side */}
       <div className="nav-actions">
 
         {/* Search */}
         <div className="search-box">
-          <span>🔍</span>
+          <span>⌕</span>
           <input
             type="text"
             placeholder="Search products..."
@@ -28,12 +28,12 @@ function Navbar() {
         </div>
 
         {/* Account */}
-        <button className="icon-button">
-          👤
+        <button className="icon-button" aria-label="Account">
+          ♡
         </button>
 
         {/* Cart */}
-        <button className="icon-button cart-button">
+        <button className="icon-button cart-button" aria-label="Shopping cart">
           🛒
           <span className="cart-count">0</span>
         </button>

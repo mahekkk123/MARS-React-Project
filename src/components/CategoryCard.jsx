@@ -4,15 +4,15 @@ function CategoryCard({ image, title }) {
 
       <div className="category-image">
         <img src={image} alt={title} />
+
+        <div className="category-overlay">
+          <button className="category-button">
+            SHOP {title.toUpperCase()}
+          </button>
+        </div>
       </div>
 
-      <div className="category-info">
-        <h3>{title}</h3>
-
-        <button className="category-button">
-          Explore
-        </button>
-      </div>
+      <h3>{title}</h3>
 
     </div>
   );

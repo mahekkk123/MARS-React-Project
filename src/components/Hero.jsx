@@ -2,23 +2,26 @@ function Hero() {
   return (
     <section className="hero">
 
+      <div className="hero-overlay"></div>
+
       <div className="hero-content">
 
         <p className="hero-subtitle">
-          NEW COLLECTION 2026
+          NEW SEASON • 2026
         </p>
 
         <h1>
-          Welcome to MARS
+          DEFINE<br />
+          YOUR STYLE.
         </h1>
 
         <p className="hero-description">
-          Discover the latest fashion, trends and styles
-          designed for you.
+          Discover fashion that matches your confidence,
+          personality and everyday style.
         </p>
 
         <button className="hero-button">
-          Shop Now
+          SHOP NOW →
         </button>
 
       </div>
