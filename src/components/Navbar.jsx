@@ -1,8 +1,13 @@
 function Navbar() {
   return (
     <nav className="navbar">
-      <div className="logo">MARS</div>
 
+      {/* MARS Logo */}
+      <div className="logo">
+        MARS
+      </div>
+
+      {/* Navigation Links */}
       <div className="nav-links">
         <a href="#">Home</a>
         <a href="#">Shop</a>
@@ -10,11 +15,22 @@ function Navbar() {
         <a href="#">About</a>
       </div>
 
-      <div className="nav-icons">
-        <span>🔍</span>
-        <span>👤</span>
-        <span>🛒</span>
+      {/* Search + Account + Cart */}
+      <div className="nav-actions">
+
+        <div className="search-box">
+          <span>🔍</span>
+          <input type="text" placeholder="Search" />
+        </div>
+
+        <button className="icon-button">👤</button>
+
+        <button className="icon-button">
+          🛒
+        </button>
+
       </div>
+
     </nav>
   );
 }

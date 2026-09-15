@@ -3,7 +3,10 @@ function CategoryCard({ image, title }) {
     <div className="category-card">
       <img src={image} alt={title} />
 
-      <h3>{title}</h3>
+      <div className="category-info">
+        <h3>{title}</h3>
+        <button>Explore</button>
+      </div>
     </div>
   );
 }
