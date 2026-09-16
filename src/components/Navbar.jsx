@@ -1,41 +1,80 @@
+import { useState } from "react";
+
 function Navbar() {
+  const [cartCount, setCartCount] = useState(0);
+
   return (
     <nav className="navbar">
 
-      {/* Logo */}
-      <div className="logo">
+      <a
+        href="#home"
+        className="logo"
+      >
         MARS
-      </div>
+      </a>
 
-      {/* Navigation */}
       <div className="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Shop</a>
-        <a href="#">Categories</a>
-        <a href="#">About</a>
+
+        <a href="#home">
+          Home
+        </a>
+
+        <a href="#products">
+          Shop
+        </a>
+
+        <a href="#categories">
+          Categories
+        </a>
+
+        <a href="#about">
+          About
+        </a>
+
       </div>
 
-      {/* Right Side */}
+
       <div className="nav-actions">
 
-        {/* Search */}
         <div className="search-box">
-          <span>⌕</span>
+
+          <span>
+            ⌕
+          </span>
+
           <input
             type="text"
             placeholder="Search products..."
+            aria-label="Search products"
           />
+
         </div>
 
-        {/* Account */}
-        <button className="icon-button" aria-label="Account">
+
+        <button
+          className="icon-button"
+          type="button"
+          aria-label="Wishlist"
+        >
           ♡
         </button>
 
-        {/* Cart */}
-        <button className="icon-button cart-button" aria-label="Shopping cart">
+
+        <button
+          className="icon-button cart-button"
+          type="button"
+          aria-label="Shopping cart"
+          onClick={() =>
+            setCartCount((count) => count + 1)
+          }
+        >
+
           🛒
-          <span className="cart-count">0</span>
+
+          <span className="cart-count">
+            {cartCount}
+          </span>
+
         </button>
 
       </div>
