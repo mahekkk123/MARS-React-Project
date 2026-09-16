@@ -1,20 +1,35 @@
-function CategoryCard({ image, title }) {
+function CategoryCard({ title, image }) {
   return (
-    <div className="category-card">
+    <a
+      href="#best-sellers"
+      className="category-card"
+      aria-label={`Shop ${title}`}
+    >
 
       <div className="category-image">
-        <img src={image} alt={title} />
+
+        <img
+          src={image}
+          alt={`${title} beauty products`}
+        />
 
         <div className="category-overlay">
-          <button className="category-button">
-            SHOP {title.toUpperCase()}
-          </button>
+
+          <div>
+            <h3>
+              {title}
+            </h3>
+
+            <span>
+              SHOP NOW →
+            </span>
+          </div>
+
         </div>
+
       </div>
 
-      <h3>{title}</h3>
-
-    </div>
+    </a>
   );
 }
 
