@@ -1,43 +1,7 @@
-import ProductCard from "./ProductCard";
-
-import blush from "../assets/blush.jpg";
-import lipstick from "../assets/lipstick.jpg";
-import mascara from "../assets/mascara.jpg";
-import skincare from "../assets/skincare.jpg";
+import Product from "./Product";
+import products from "../data/products";
 
 function ProductSection() {
-
-  const products = [
-    {
-      name: "MARS Blush",
-      description: "Soft natural finish blush",
-      price: 399,
-      rating: 4.8,
-      image: blush,
-    },
-    {
-      name: "MARS Lip Tint",
-      description: "Long lasting lip color",
-      price: 299,
-      rating: 4.7,
-      image: lipstick,
-    },
-    {
-      name: "MARS Mascara",
-      description: "Volume & length mascara",
-      price: 349,
-      rating: 4.9,
-      image: mascara,
-    },
-    {
-      name: "MARS Face Serum",
-      description: "Lightweight hydrating serum",
-      price: 499,
-      rating: 4.8,
-      image: skincare,
-    },
-  ];
-
   return (
     <section
       className="person2-section"
@@ -64,8 +28,8 @@ function ProductSection() {
       <div className="person2-grid">
 
         {products.map((product) => (
-          <ProductCard
-            key={product.name}
+          <Product
+            key={product.id}
             product={product}
           />
         ))}
