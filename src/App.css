@@ -1889,3 +1889,24 @@ a {
     min-height: 55px;
   }
 }
+
+
+.wishlist-nav {
+  position: relative;
+}
+
+.wishlist-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -3,7 +3,7 @@ function Newsletter() {
     <section className="newsletter">
       <div className="newsletter-image">
         <img
-          src="/mars-newsletter.jpg"
+          src="/newsletter.jpg"
           alt="MARS Beauty"
         />
       </div>
