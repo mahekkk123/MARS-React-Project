@@ -1,40 +1,100 @@
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import CategoryCard from "./components/CategoryCard";
 import ProductSection from "./components/ProductSection";
+import GiftBanner from "./components/GiftBanner";
+import Newsletter from "./components/Newsletter";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
+  const [cartCount, setCartCount] = useState(0);
+  const [search, setSearch] = useState("");
+  const [favorites, setFavorites] = useState([]);
+
+  const handleFavorite = (productName) => {
+    setFavorites((currentFavorites) => {
+      if (currentFavorites.includes(productName)) {
+        return currentFavorites.filter(
+          (name) => name !== productName
+        );
+      }
+
+      return [...currentFavorites, productName];
+    });
+  };
+
+  const handleAddToCart = () => {
+    setCartCount((count) => count + 1);
+  };
+
+  const bestSellers = [
+    {
+      name: "MARS Foundation",
+      description: "Natural Finish Foundation",
+      price: 499,
+      rating: 4.8,
+      image:
+        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85",
+      badge: "BESTSELLER",
+    },
+    {
+      name: "MARS Lipstick",
+      description: "Long Lasting Matte Lip Color",
+      price: 299,
+      rating: 4.9,
+      image:
+        "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85",
+      badge: "TRENDING",
+    },
+    {
+      name: "MARS Mascara",
+      description: "Volume & Length Mascara",
+      price: 249,
+      rating: 4.7,
+      image:
+        "https://marscosmetics.in/cdn/shop/files/12Colors_771caa9c-d47c-4522-8882-de0feb9b7110.jpg?v=1764572463&width=800",
+      badge: "NEW",
+    },
+    {
+      name: "MARS Face Serum",
+      description: "Hydrating Glow Serum",
+      price: 399,
+      rating: 4.8,
+      image:
+        "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=85",
+      badge: "POPULAR",
+    },
+  ];
+
+  const filteredBestSellers = bestSellers.filter((product) =>
+    `${product.name} ${product.description}`
+      .toLowerCase()
+      .includes(search.toLowerCase())
+  );
+
   return (
-    <div className="mars-app">
+    <div className="mars-app" id="home">
 
-      {/* =========================
-          NAVBAR
-      ========================= */}
-      <Navbar />
+      {/* Navbar */}
+      <Navbar
+        cartCount={cartCount}
+        search={search}
+        setSearch={setSearch}
+        favorites={favorites}
+      />
 
-
-      {/* =========================
-          HERO
-      ========================= */}
+      {/* Hero */}
       <Hero />
 
+      {/* Categories */}
+      <section className="category-section" id="categories">
+        <p className="section-label">EXPLORE MARS BEAUTY</p>
 
-      {/* =========================
-          BEAUTY CATEGORIES
-      ========================= */}
-      <section className="category-section">
-
-        <p className="section-label">
-          EXPLORE MARS BEAUTY
-        </p>
-
-        <h2>
-          Shop by Category
-        </h2>
+        <h2>Shop by Category</h2>
 
         <div className="category-grid">
-
           <CategoryCard
             title="Face"
             image="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=85"
@@ -54,319 +114,95 @@ function App() {
             title="Skincare"
             image="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=85"
           />
-
         </div>
-
       </section>
 
+      {/* Best Sellers */}
+      <section className="products-section" id="products">
+        <p className="section-label">MARS BEAUTY FAVOURITES</p>
 
-      {/* =========================
-          BEST SELLERS
-      ========================= */}
-      <section className="products-section">
-
-        <p className="section-label">
-          MARS BEAUTY FAVOURITES
-        </p>
-
-        <h2>
-          Best Sellers
-        </h2>
+        <h2>Best Sellers</h2>
 
         <div className="products-grid">
-
-          {/* FOUNDATION */}
-          <div className="product-card">
-
-            <div className="product-image">
-              <img
-                src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
-                alt="MARS Foundation"
-              />
-
-              <span className="product-badge">
-                BESTSELLER
-              </span>
-
-              <button
-                className="wishlist"
-                aria-label="Add to wishlist"
+          {filteredBestSellers.length > 0 ? (
+            filteredBestSellers.map((product) => (
+              <div
+                className="product-card"
+                key={product.name}
               >
-                ♡
-              </button>
-            </div>
+                <div className="product-image">
 
-            <div className="product-info">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                  />
 
-              <h3>MARS Foundation</h3>
+                  <span className="product-badge">
+                    {product.badge}
+                  </span>
 
-              <p>
-                Natural Finish Foundation
-              </p>
+                  <button
+                    className="wishlist"
+                    type="button"
+                    aria-label="Add to wishlist"
+                    onClick={() =>
+                      handleFavorite(product.name)
+                    }
+                  >
+                    {favorites.includes(product.name)
+                      ? "♥"
+                      : "♡"}
+                  </button>
 
-              <div className="product-bottom">
-                <strong>₹499</strong>
-                <span>★ 4.8</span>
+                </div>
+
+                <div className="product-info">
+
+                  <h3>{product.name}</h3>
+
+                  <p>{product.description}</p>
+
+                  <div className="product-bottom">
+                    <strong>₹{product.price}</strong>
+
+                    <span>
+                      ★ {product.rating}
+                    </span>
+                  </div>
+
+                  <button
+                    className="add-bag"
+                    type="button"
+                    onClick={handleAddToCart}
+                  >
+                    ADD TO BAG
+                  </button>
+
+                </div>
               </div>
-
-              <button className="add-bag">
-                ADD TO BAG
-              </button>
-
-            </div>
-          </div>
-
-
-          {/* LIPSTICK */}
-          <div className="product-card">
-
-            <div className="product-image">
-
-              <img
-                src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
-                alt="MARS Lipstick"
-              />
-
-              <span className="product-badge">
-                TRENDING
-              </span>
-
-              <button
-                className="wishlist"
-                aria-label="Add to wishlist"
-              >
-                ♡
-              </button>
-
-            </div>
-
-            <div className="product-info">
-
-              <h3>MARS Lipstick</h3>
-
-              <p>
-                Long Lasting Matte Lip Color
-              </p>
-
-              <div className="product-bottom">
-                <strong>₹299</strong>
-                <span>★ 4.9</span>
-              </div>
-
-              <button className="add-bag">
-                ADD TO BAG
-              </button>
-
-            </div>
-          </div>
-
-
-          {/* MASCARA */}
-          <div className="product-card">
-
-            <div className="product-image mascara-image">
-
-              <img
-                src="https://images.unsplash.com/photo-1631214524020-7e18db9e98c3?auto=format&fit=crop&w=700&q=85"
-                alt="MARS Mascara"
-                onError={(e) => {
-                  e.currentTarget.src =
-                    "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85";
-                }}
-              />
-
-              <span className="product-badge">
-                NEW
-              </span>
-
-              <button
-                className="wishlist"
-                aria-label="Add to wishlist"
-              >
-                ♡
-              </button>
-
-            </div>
-
-            <div className="product-info">
-
-              <h3>MARS Mascara</h3>
-
-              <p>
-                Volume & Length Mascara
-              </p>
-
-              <div className="product-bottom">
-                <strong>₹249</strong>
-                <span>★ 4.7</span>
-              </div>
-
-              <button className="add-bag">
-                ADD TO BAG
-              </button>
-
-            </div>
-          </div>
-
-
-          {/* SERUM */}
-          <div className="product-card">
-
-            <div className="product-image">
-
-              <img
-                src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=85"
-                alt="MARS Face Serum"
-              />
-
-              <span className="product-badge">
-                POPULAR
-              </span>
-
-              <button
-                className="wishlist"
-                aria-label="Add to wishlist"
-              >
-                ♡
-              </button>
-
-            </div>
-
-            <div className="product-info">
-
-              <h3>MARS Face Serum</h3>
-
-              <p>
-                Hydrating Glow Serum
-              </p>
-
-              <div className="product-bottom">
-                <strong>₹399</strong>
-                <span>★ 4.8</span>
-              </div>
-
-              <button className="add-bag">
-                ADD TO BAG
-              </button>
-
-            </div>
-          </div>
-
+            ))
+          ) : (
+            <p>No products found.</p>
+          )}
         </div>
-
       </section>
 
+      {/* Our Beauty Picks */}
+      <ProductSection
+        onAddToCart={handleAddToCart}
+        search={search}
+        favorites={favorites}
+        onFavorite={handleFavorite}
+      />
 
-      {/* =========================
-          PERSON 2 PRODUCT SECTION
-      ========================= */}
-      <ProductSection />
+      {/* Gift Banner */}
+      <GiftBanner />
 
+      {/* Newsletter / MARS Party */}
+      <Newsletter />
 
-      {/* ==================================================
-          PARTY / NEWSLETTER
-          THIS COMES FIRST
-      ================================================== */}
-
-      <section className="feature-wrapper">
-
-        <div className="party-card">
-
-          <div className="party-image">
-
-            <img
-              src="/newsletter.jpg"
-              alt="MARS Beauty Community"
-            />
-
-          </div>
-
-          <div className="party-content">
-
-            <p className="feature-label">
-              STAY IN THE LOOP
-            </p>
-
-            <h2>
-              Join the MARS
-              <br />
-              Party!
-            </h2>
-
-            <p className="feature-description">
-              Get the latest launches, exclusive offers,
-              beauty tips and all things MARS straight
-              to your inbox.
-            </p>
-
-            <div className="newsletter-form">
-
-              <input
-                type="email"
-                placeholder="Enter your email address"
-              />
-
-              <button>
-                JOIN NOW
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      {/* ==================================================
-          GIFT / FINAL CTA
-          THIS MUST BE LAST
-      ================================================== */}
-
-      <section className="feature-wrapper final-cta-wrapper">
-
-        <div className="gift-card">
-
-          <div className="gift-content">
-
-            <p className="feature-label">
-              MARS SPECIAL
-            </p>
-
-            <h2>
-              Who doesn't love
-              <br />
-              a free gift?
-            </h2>
-
-            <p className="feature-description">
-              Get a free Hue Gel Eyeliner with your order
-              and add a little extra magic to your makeup look.
-            </p>
-
-            <p className="gift-code">
-              Use Code <strong>"HUEGEL"</strong>
-            </p>
-
-            <button className="final-shop-button">
-              GET YOUR GIFT →
-            </button>
-
-          </div>
-
-          <div className="gift-image">
-
-            <img
-              src="/gift.jpg"
-              alt="MARS Special Gift"
-            />
-
-          </div>
-
-        </div>
-
-      </section>
+      {/* Footer */}
+      <Footer />
 
     </div>
   );

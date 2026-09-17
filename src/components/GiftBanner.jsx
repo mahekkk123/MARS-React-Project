@@ -36,7 +36,7 @@ function GiftBanner() {
       <div className="gift-image">
 
         <img
-          src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=1000&q=85"
+          src="/gift.jpg"
           alt="Gift boxes and flowers"
         />
 
