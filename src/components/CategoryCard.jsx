@@ -1,35 +1,32 @@
+import { useNavigate } from "react-router-dom";
+
 function CategoryCard({ title, image }) {
+  const navigate = useNavigate();
+
   return (
-    <a
-      href="#best-sellers"
+    <div
       className="category-card"
-      aria-label={`Shop ${title}`}
+      onClick={() =>
+        navigate(`/search?q=${title}`)
+      }
+      style={{ cursor: "pointer" }}
     >
 
-      <div className="category-image">
+      <img
+        src={image}
+        alt={title}
+        loading="lazy"
+      />
 
-        <img
-          src={image}
-          alt={`${title} beauty products`}
-        />
+      <div className="category-overlay">
+        <h3>{title}</h3>
 
-        <div className="category-overlay">
-
-          <div>
-            <h3>
-              {title}
-            </h3>
-
-            <span>
-              SHOP NOW →
-            </span>
-          </div>
-
-        </div>
-
+        <span>
+          SHOP NOW →
+        </span>
       </div>
 
-    </a>
+    </div>
   );
 }
 

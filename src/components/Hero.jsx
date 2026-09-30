@@ -1,136 +1,77 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import heroImg from "../assets/hero.png";
+import blushImg from "../assets/blush.jpg";
 
+// Change the image of any slide here
 const slides = [
   {
-    image:
-      "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=90",
-    smallText: "MAKEUP • BEAUTY • CONFIDENCE",
-    title: "BEAUTY THAT",
-    highlight: "FEELS LIKE YOU.",
-    description:
-      "Discover makeup and skincare essentials designed for your everyday glow.",
+    eyebrow: "MARS BEAUTY",
+    lines: ["YOUR", "BEAUTY.", "YOUR RULES."],
+    text: "From bold looks to everyday essentials, find beauty made for you.",
+    image: heroImg,
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1800&q=90",
-    smallText: "NEW BEAUTY EDIT",
-    title: "OWN YOUR",
-    highlight: "EVERYDAY GLOW.",
-    description:
-      "Build your beauty routine with products made to complement your style.",
+    eyebrow: "MAKEUP • BEAUTY • CONFIDENCE",
+    lines: ["BEAUTY THAT", "FEELS LIKE", "YOU."],
+    text: "Discover makeup and skincare essentials designed for your everyday glow.",
+    image: "/images/categories/face.jpg",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1800&q=90",
-    smallText: "MARS BEAUTY",
-    title: "YOUR BEAUTY.",
-    highlight: "YOUR RULES.",
-    description:
-      "From bold looks to everyday essentials, find beauty made for you.",
+    eyebrow: "NEW BEAUTY EDIT",
+    lines: ["OWN YOUR", "EVERYDAY", "GLOW."],
+    text: "Build your beauty routine with products made to complement your style.",
+    image: blushImg,
   },
 ];
 
 function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [i, setI] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((current) =>
-        current === slides.length - 1 ? 0 : current + 1
-      );
-    }, 5000);
+    const t = setInterval(() => setI((n) => (n + 1) % slides.length), 5000);
+    return () => clearInterval(t);
+  }, [i]);
 
-    return () => clearInterval(timer);
-  }, []);
-
-  const nextSlide = () => {
-    setCurrentSlide((current) =>
-      current === slides.length - 1 ? 0 : current + 1
-    );
-  };
-
-  const previousSlide = () => {
-    setCurrentSlide((current) =>
-      current === 0 ? slides.length - 1 : current - 1
-    );
-  };
-
-  const slide = slides[currentSlide];
+  const prev = () => setI((n) => (n - 1 + slides.length) % slides.length);
+  const next = () => setI((n) => (n + 1) % slides.length);
+  const s = slides[i];
 
   return (
-    <section className="hero">
+    <section className="mh">
+      {slides.map((sl, idx) => (
+        <div
+          key={idx}
+          className={`mh-slide ${idx === i ? "on" : ""}`}
+          style={{ backgroundImage: `url(${sl.image})` }}
+        />
+      ))}
 
-      {/* Background Image */}
-      <div
-        className="hero-background"
-        style={{
-          backgroundImage: `url(${slide.image})`,
-        }}
-      />
+      <button type="button" className="mh-arrow prev" onClick={prev} aria-label="Previous slide">←</button>
+      <button type="button" className="mh-arrow next" onClick={next} aria-label="Next slide">→</button>
 
-      {/* Burgundy overlay */}
-      <div className="hero-overlay" />
-
-      {/* Content */}
-      <div className="hero-content">
-
-        <p className="hero-subtitle">
-          {slide.smallText}
-        </p>
-
-        <h1>
-          {slide.title}
-          <br />
-          <span>{slide.highlight}</span>
+      <div className="mh-content" key={i}>
+        <p className="mh-eyebrow">{s.eyebrow}</p>
+        <h1 className="mh-title">
+          <span>{s.lines[0]}</span>
+          <span>{s.lines[1]}</span>
+          <span className="pink">{s.lines[2]}</span>
         </h1>
-
-        <p className="hero-description">
-          {slide.description}
-        </p>
-
-        <a
-          href="#products"
-          className="hero-button"
-        >
-          SHOP NOW →
-        </a>
-
+        <p className="mh-text">{s.text}</p>
+        <Link to="/shop" className="mh-btn">SHOP NOW →</Link>
       </div>
 
-      {/* Previous */}
-      <button
-        className="hero-arrow hero-arrow-left"
-        onClick={previousSlide}
-        aria-label="Previous slide"
-      >
-        ‹
-      </button>
-
-      {/* Next */}
-      <button
-        className="hero-arrow hero-arrow-right"
-        onClick={nextSlide}
-        aria-label="Next slide"
-      >
-        ›
-      </button>
-
-      {/* Slide indicators */}
-      <div className="hero-dots">
-
-        {slides.map((_, index) => (
+      <div className="mh-dots">
+        {slides.map((_, idx) => (
           <button
-            key={index}
-            className={`hero-dot ${
-              currentSlide === index ? "active" : ""
-            }`}
-            onClick={() => setCurrentSlide(index)}
-            aria-label={`Go to slide ${index + 1}`}
+            key={idx}
+            type="button"
+            className={idx === i ? "on" : ""}
+            onClick={() => setI(idx)}
+            aria-label={`Go to slide ${idx + 1}`}
           />
         ))}
-
       </div>
-
     </section>
   );
 }
