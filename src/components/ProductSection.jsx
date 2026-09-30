@@ -1,50 +1,47 @@
-import Product from "./Product";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import ProductCard from "./ProductCard";
 import products from "../data/products";
 
-function ProductSection({
-  onAddToCart,
-  search = "",
-  favorites = [],
-  onFavorite = () => {},
-}) {
-  const filteredProducts = products.filter((product) =>
-    `${product.name} ${product.description}`
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  );
+const TABS = ["Lips", "Face", "Eyes", "Tools"];
+
+function ProductSection() {
+  const [activeTab, setActiveTab] = useState("Lips");
+
+  const visible = products
+    .filter((p) => p.category === activeTab)
+    .slice(0, 4);
 
   return (
-    <section
-      className="person2-section"
-      id="products"
-    >
-      <div className="person2-heading">
-        <p className="section-label">
-          MARS BEAUTY FAVOURITES
-        </p>
+    <section className="best-sellers">
+      <h2>Best Sellers</h2>
 
-        <h2>Our Beauty Picks</h2>
-
-        <p>
-          Everyday essentials made for your beauty routine.
-        </p>
+      <div className="best-tabs">
+        {TABS.map((tab) => (
+          <button
+            key={tab}
+            type="button"
+            className={activeTab === tab ? "active" : ""}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
+          </button>
+        ))}
       </div>
 
-      <div className="person2-grid">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <Product
-              key={product.id}
-              product={product}
-              onAddToCart={onAddToCart}
-              favorites={favorites}
-              onFavorite={onFavorite}
-            />
+      <div className="best-grid">
+        {visible.length > 0 ? (
+          visible.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <p>No products found.</p>
+          <p className="best-empty">New {activeTab} products are coming soon.</p>
         )}
       </div>
+
+      <Link to={`/category/${activeTab}`} className="best-viewall">
+        VIEW ALL {activeTab.toUpperCase()}
+      </Link>
     </section>
   );
 }

@@ -1,47 +1,44 @@
+import { useNavigate } from "react-router-dom";
+import { useShop } from "../context/ShopContext";
+
 function GiftBanner() {
+  const navigate = useNavigate();
+  const { applyPromo } = useShop();
+
+  const handleGift = () => {
+    applyPromo("HUEGEL");
+    navigate("/shop");
+  };
+
   return (
-    <section className="gift-section">
+    <section className="gift-banner">
+      <div className="gift-banner-inner">
+        <div className="gift-banner-content">
+          <p className="gift-eyebrow">MARS SPECIAL</p>
 
-      <div className="gift-content">
+          <h2>
+            Who doesn't love
+            <br />a free gift?
+          </h2>
 
-        <p className="gift-label">
-          MARS SPECIAL
-        </p>
+          <p>
+            Get a free Hue Gel Eyeliner with your order and add a little extra
+            magic to your makeup look.
+          </p>
 
-        <h2>
-          Who doesn't love
-          <br />
-          a free gift?
-        </h2>
+          <p className="gift-code">
+            Use Code <strong>"HUEGEL"</strong>
+          </p>
 
-        <p className="gift-description">
-          Get a free Hue Gel Eyeliner with your order
-          and add a little extra magic to your makeup look.
-        </p>
+          <button type="button" className="gift-btn btn-dark" onClick={handleGift}>
+            GET YOUR GIFT
+          </button>
+        </div>
 
-        <p className="gift-code">
-          Use Code <strong>"HUEGEL"</strong>
-        </p>
-
-        <button
-          type="button"
-          className="gift-button"
-        >
-          GET YOUR GIFT
-        </button>
-
+        <div className="gift-banner-image">
+          <img src="/gift.jpg" alt="MARS free gift" loading="lazy" decoding="async" />
+        </div>
       </div>
-
-
-      <div className="gift-image">
-
-        <img
-          src="/gift.jpg"
-          alt="Gift boxes and flowers"
-        />
-
-      </div>
-
     </section>
   );
 }
