@@ -1,16 +1,34 @@
-# React + Vite
+MARS — Beauty E-Commerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern beauty e-commerce website built with React and Vite, inspired by the MARS Cosmetics aesthetic.
 
-Currently, two official plugins are available:
+Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+🔗 [View Live Website]- https://mars-react-project.vercel.app
 
-## React Compiler
+FEATURES:
+- Responsive beauty e-commerce interface
+- Hero section with promotional content
+- Product categories
+- Best-selling products
+- Product search
+- Wishlist / favorites
+- Add-to-bag functionality
+- Gift banner
+- Newsletter section
+- Responsive navigation and footer
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+TECH STACK:
+- React
+- Vite
+- JavaScript
+- CSS
+- React Router
 
-## Expanding the ESLint configuration
+Getting Started:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+git clone https://github.com/sadafansari2006-09/MARS-React-Project.git
+cd MARS-React-Project
+npm install
+npm run dev
